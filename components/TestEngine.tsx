@@ -141,9 +141,9 @@ export default function TestEngine({ testId }: Props) {
 
           <p className="text-xs text-subtle italic leading-relaxed mb-6">{meta.intro}</p>
 
-          <div className="bg-card border border-border rounded-xl px-4 py-3 mb-6">
+          <div className="bg-card border border-border rounded-2xl p-5 mb-6">
             <p className="text-xs text-subtle">
-              You can complete this test at no cost. Access to the full results report is a one-time $19.99 purchase at the end.
+              This assessment is a tool for clarity, not a verdict. Bring the results before God, and let Him confirm what is true.
             </p>
           </div>
         </div>

@@ -20,11 +20,11 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: 'Discovery Suite — Know Yourself. Know Your Calling.',
   description:
-    'Three research-based assessments to help you discover your God-given talents, personality, and connection style — and find the work you were made for.',
+    'Three guided assessments to help you notice patterns in your gifts, temperament, and ways of connecting — so you can bring them before God for discernment.',
   keywords: ['personality test', 'strengths assessment', 'faith', 'calling', 'Christian', 'purpose', 'spiritual growth'],
   openGraph: {
     title: 'Discovery Suite — Know Yourself. Know Your Calling.',
-    description: 'Discover your God-given talents, personality, and connection style.',
+    description: 'Notice patterns in gifts, temperament, and connection style — then bring what you see before God for discernment.',
     type: 'website',
   },
   twitter: { card: 'summary_large_image' },

@@ -77,7 +77,7 @@ export default function ResultsPage() {
           <div className="mb-6">
             <p className="text-[10px] tracking-[0.4em] uppercase mb-2" style={{ color: meta.color }}>Results ready</p>
             <h1 className="font-display text-3xl text-text mb-2">{meta.name}</h1>
-            <p className="text-sm text-subtle">You completed the assessment. Unlock your full results below.</p>
+            <p className="text-sm text-subtle">You completed the assessment. Treat the results below as a starting point for prayerful discernment, not the final word.</p>
           </div>
 
           {/* Blurred preview */}
@@ -134,9 +134,9 @@ export default function ResultsPage() {
 
         {/* Retake recommendation */}
         <div className="bg-card border border-border rounded-2xl p-5 mb-4">
-          <p className="text-[10px] tracking-[0.3em] text-muted uppercase mb-2">Grow with it</p>
+          <p className="text-[10px] tracking-[0.3em] text-muted uppercase mb-2">Keep it open-handed</p>
           <p className="text-sm text-subtle leading-relaxed">
-            We recommend retaking this assessment <span className="text-text font-semibold">2–3 times per year</span>. As you grow, your results will deepen and shift. Each retake reveals something new.
+            Use what helps, bring the rest to prayer, and remember that the Lord still gets the final word.
           </p>
         </div>
 

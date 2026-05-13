@@ -7,7 +7,7 @@ import { loadResults } from '@/lib/storage'
 import type { AllResults } from '@/lib/data'
 import { TEST_META } from '@/lib/data'
 
-const OPENING_PRAYER = `Father, I come to You before I begin.\n\nI believe that You formed me with intention — that my strengths, my wiring, and the way I love are not accidents. They are gifts, carefully placed, waiting to be understood and offered.\n\nLet this be more than a test. Let it be an act of stewardship.\nLet what I discover here lead me closer to the work You designed me for, and closer to the people I was made to love.\n\nIn Your name — Amen.`
+const OPENING_PRAYER = `Father, if I'm still learning who I am, meet me here with grace.\nHelp me listen honestly, without needing a label to carry me.\nLet what is useful become a starting point, not a verdict.\nLet what is true be confirmed in Your light, and let what is unhelpful be laid down.\nAs I sort through these patterns, keep my heart soft, my ego quiet, and my eyes on You.\nIn Jesus' name — Amen.`
 
 const TEST_CARDS = [
   {
@@ -104,7 +104,7 @@ export default function HomePage() {
         </h1>
 
         <p className="text-subtle text-base leading-relaxed mb-8 max-w-sm mx-auto">
-          Three research-based assessments to help you discover your God-given talents, personality, and connection style — and find the work you were made for.
+          Three guided assessments to help you notice patterns in your gifts, temperament, and ways of connecting — so you can bring them before God for discernment.
         </p>
 
         {!prayerDone && (
@@ -141,9 +141,9 @@ export default function HomePage() {
 
         <div className="space-y-5">
           {[
-            { icon: '📖', title: 'Self-knowledge is stewardship', body: 'Understanding how you were made isn\'t vanity — it\'s faithfulness. When you know your gifts, you can offer them more fully.' },
-            { icon: '🎯', title: 'Calling requires clarity', body: 'You can\'t find the right work, the right team, or the right community without understanding who you actually are — not who you\'re trying to be.' },
-            { icon: '🌱', title: 'You were made on purpose', body: 'Psalm 139 says you are fearfully and wonderfully made. These assessments are one way to sit with that truth and let it become practical.' },
+            { icon: '📖', title: 'Self-knowledge is stewardship', body: 'Learning about yourself can be helpful, but it is not the same as hearing from God. Use what helps, and hold the rest with open hands.' },
+            { icon: '🎯', title: 'Calling requires clarity', body: 'You can\'t find the right work, the right team, or the right community if a test becomes your final authority. Let it raise questions, then take those questions to God.' },
+            { icon: '🌱', title: 'You were made on purpose', body: 'Psalm 139 says you are fearfully and wonderfully made. This can point you toward prayerful discernment, but the Lord still has the final word.' },
           ].map(item => (
             <div key={item.title} className="flex gap-4 items-start">
               <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center text-lg flex-shrink-0">{item.icon}</div>
@@ -238,10 +238,10 @@ export default function HomePage() {
           <p className="text-[10px] tracking-[0.3em] text-muted uppercase mb-3">How it works</p>
           <div className="space-y-3">
             {[
-              { step: '1', text: 'Take any test — completely free, no account required.' },
-              { step: '2', text: 'Your progress is saved automatically. Complete in one sitting for best results.' },
-              { step: '3', text: 'At the end, unlock your full results report with a one-time $19.99 payment.' },
-              { step: '4', text: 'Optionally receive a PDF via email to save, print, or share.' },
+              { step: '1', text: 'Take the assessment as a starting point, not a verdict.' },
+              { step: '2', text: 'Move slowly enough to notice what feels true, and what feels worth bringing to God.' },
+              { step: '3', text: 'When you reach the end, treat the results as a prompt for prayerful discernment.' },
+              { step: '4', text: 'If you want a PDF, you can still receive one by email to revisit later.' },
             ].map(item => (
               <div key={item.step} className="flex gap-3 items-start">
                 <div className="w-5 h-5 rounded-full bg-gold/15 text-gold text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">

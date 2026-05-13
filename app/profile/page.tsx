@@ -70,13 +70,9 @@ export default function ProfilePage() {
         {/* Calling statement */}
         {top5.length > 0 && (
           <div className="bg-gradient-to-br from-[#1A1408] to-[#0E0E0E] border border-gold/30 rounded-2xl p-6 mb-6 text-center">
-            <p className="text-[10px] tracking-[0.4em] text-gold uppercase mb-3">Your calling signature</p>
+            <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-3">A prayerful sketch</p>
             <p className="font-display text-xl text-text leading-relaxed italic">
-              "A person driven by{' '}
-              <span className="text-gold not-italic font-semibold">{top5[0]}</span>
-              {top5[1] && <> and <span className="text-gold not-italic font-semibold">{top5[1]}</span></>}
-              {highOcean.length > 0 && <>, with a <span className="text-gold not-italic font-semibold">{highOcean[0]}</span> personality</>}
-              {primaryConnect && <>, who connects through <span className="text-gold not-italic font-semibold">{primaryConnect.name}</span></>}."
+              "These results are a starting point, not a final word."
             </p>
           </div>
         )}
@@ -156,18 +152,18 @@ export default function ProfilePage() {
 
         {/* What this means */}
         <div className="bg-gradient-to-br from-[#100A18] to-[#0E0E0E] border border-purple/20 rounded-2xl p-6 mb-6">
-          <p className="text-[10px] tracking-[0.3em] text-purple uppercase mb-4">What this means for your calling</p>
+          <p className="text-[10px] tracking-[0.3em] text-purple uppercase mb-4">What this may point toward</p>
           <p className="text-sm text-subtle leading-relaxed mb-4">
-            Your gifts, personality, and connection style aren't random — they're a blueprint. The way you were wired points directly toward the kind of work that will feel both purposeful and sustainable.
+            These results may help you notice patterns, but they are not a blueprint or a verdict. Bring what resonates to God, and leave room for Him to confirm, redirect, or refine it.
           </p>
           {primaryDomain && (
             <p className="text-sm text-subtle leading-relaxed mb-4">
-              Your top talents cluster in the <span className="text-text font-semibold">{primaryDomain}</span> domain — meaning that's where your most natural energy lives. Seek roles and communities that operate in that space.
+              Your strongest patterns may suggest where you tend to thrive, but the Lord still has the final word.
             </p>
           )}
           {primaryConnect && (
             <p className="text-sm text-subtle leading-relaxed">
-              You give and receive love through <span className="text-text font-semibold">{primaryConnect.name}</span> — which means the right team and community will honor that. Don't settle for environments that don't.
+              This is the kind of care pattern you may notice most often. Let it be an invitation to prayer, not an identity label.
             </p>
           )}
         </div>
