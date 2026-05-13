@@ -184,7 +184,7 @@ export default function ProfilePage() {
                   <span className="text-xl">{m.icon}</span>
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-text">{m.name}</p>
-                    <p className="text-xs text-muted">{m.estimatedMinutes} min · Free to take</p>
+                    <p className="text-xs text-muted">{m.estimatedMinutes} min · Start free</p>
                   </div>
                   <span className="text-xs text-muted">Start →</span>
                 </Link>

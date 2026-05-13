@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
               name: `Discovery Suite — Results Unlock`,
               description: `Detailed results report for your ${testId === 'talent' ? 'Talent Profile' : testId === 'ocean' ? 'Personality Profile' : 'Connection Style'} assessment${wantsPdf ? ' + PDF via email' : ''}`,
             },
-            unit_amount: 499, // $4.99
+            unit_amount: 1999, // $19.99
           },
           quantity: 1,
         },

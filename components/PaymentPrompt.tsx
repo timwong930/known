@@ -12,7 +12,7 @@ interface Props {
   onAlreadyPaid?: () => void
 }
 
-const PRICE = '$4.99'
+const PRICE = '$19.99'
 
 export default function PaymentPrompt({ testId, testName, onAlreadyPaid }: Props) {
   const [loading, setLoading] = useState(false)

@@ -7,7 +7,7 @@ A faith-centered, mobile-first self-discovery platform with three original asses
 - 🌊 **Personality Profile** — IPIP-50 (public domain Big Five), 50 questions
 - 💛 **Connection Style** — 30 paired questions across 5 original connection styles
 
-**Free to take. Results are a one-time $4.99 charge.**
+**Complete free. Results unlock for a one-time $19.99 fee.**
 
 ---
 
@@ -69,7 +69,7 @@ Open [http://localhost:3000](http://localhost:3000)
 
 1. Go to [Stripe Dashboard → Products](https://dashboard.stripe.com/products)
 2. Create a product: **"Discovery Suite Results Unlock"**
-3. Price: **$4.99 one-time**
+3. Price: **$19.99 one-time**
 4. Copy the **Price ID** (starts with `price_`)
 
 ### Set up webhooks (for PDF email delivery)
@@ -176,7 +176,7 @@ discovery-suite/
 | Action | Cost |
 |--------|------|
 | Take any test | Free |
-| View results (1 test) | $4.99 one-time |
+| View results (1 test) | $19.99 one-time |
 | PDF via email | Included |
 | Retake tests | Free |
 | Subscription | None — ever |

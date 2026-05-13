@@ -155,7 +155,7 @@ export default function ResultsPage() {
                   <span className="text-lg">{m.icon}</span>
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-text">{m.name}</p>
-                    <p className="text-xs text-muted">{done ? 'View results' : `${m.estimatedMinutes} min · Free to take`}</p>
+                    <p className="text-xs text-muted">{done ? 'View results' : `${m.estimatedMinutes} min · Start free`}</p>
                   </div>
                   <span className="text-xs text-muted">{done ? '→' : 'Start →'}</span>
                 </Link>

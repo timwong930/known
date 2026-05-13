@@ -141,10 +141,9 @@ export default function TestEngine({ testId }: Props) {
 
           <p className="text-xs text-subtle italic leading-relaxed mb-6">{meta.intro}</p>
 
-          <div className="bg-green/5 border border-green/20 rounded-xl px-4 py-3 mb-6">
+          <div className="bg-card border border-border rounded-xl px-4 py-3 mb-6">
             <p className="text-xs text-subtle">
-              <span className="text-green font-semibold">This test is completely free.</span>{' '}
-              Unlocking your detailed results report is a one-time $4.99 charge at the end.
+              You can complete this test at no cost. Access to the full results report is a one-time $19.99 purchase at the end.
             </p>
           </div>
         </div>

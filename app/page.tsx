@@ -98,10 +98,6 @@ export default function HomePage() {
 
       {/* ── Hero ── */}
       <section className="px-5 pt-16 pb-8 text-center max-w-lg mx-auto">
-        <div className="inline-flex items-center gap-2 bg-gold/10 border border-gold/20 rounded-full px-4 py-1.5 mb-8">
-          <span className="text-gold text-xs tracking-[0.3em] uppercase">Free to take · Paid to unlock</span>
-        </div>
-
         <h1 className="font-display text-[42px] leading-[1.1] text-text mb-4">
           Know Yourself.<br />
           <span className="text-gold italic">Know Your Calling.</span>
@@ -131,8 +127,7 @@ export default function HomePage() {
         <div className="flex items-center gap-3 bg-green/5 border border-green/20 rounded-xl px-4 py-3.5">
           <span className="text-green text-lg">✓</span>
           <p className="text-sm text-subtle">
-            <span className="text-green font-semibold">All three tests are completely free to take.</span>{' '}
-            Results are unlocked with a one-time payment of $4.99 per test.
+            Start free. Full results unlock with a one-time $19.99 payment per test.
           </p>
         </div>
       </section>
@@ -217,7 +212,7 @@ export default function HomePage() {
                       <div className="flex items-center gap-3 mt-3">
                         <span className="text-[10px] text-muted">{card.questions} questions</span>
                         <span className="text-[10px] text-muted">·</span>
-                        <span className="text-[10px] text-green font-semibold">Free to take</span>
+                        <span className="text-[10px] text-green font-semibold">Start free</span>
                       </div>
                     </div>
                   </div>
@@ -245,7 +240,7 @@ export default function HomePage() {
             {[
               { step: '1', text: 'Take any test — completely free, no account required.' },
               { step: '2', text: 'Your progress is saved automatically. Complete in one sitting for best results.' },
-              { step: '3', text: 'At the end, unlock your full results report for a one-time $4.99.' },
+              { step: '3', text: 'At the end, unlock your full results report with a one-time $19.99 payment.' },
               { step: '4', text: 'Optionally receive a PDF via email to save, print, or share.' },
             ].map(item => (
               <div key={item.step} className="flex gap-3 items-start">
@@ -258,7 +253,7 @@ export default function HomePage() {
           </div>
           <div className="mt-4 pt-4 border-t border-border">
             <p className="text-xs text-muted text-center">
-              <span className="text-green font-semibold">Free to take.</span> Results are a one-time $4.99 per test. No subscriptions. No accounts needed.
+              <span className="text-green font-semibold">Start free.</span> Results are a one-time $19.99 per test. No subscriptions. No accounts needed.
             </p>
           </div>
         </div>
