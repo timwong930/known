@@ -13,33 +13,33 @@ const TEST_CARDS = [
   {
     id: 'talent' as const,
     name: 'Talent Profile',
-    subtitle: 'Your dominant gifts',
+    subtitle: 'Patterns in your gifts',
     icon: '⚡',
     color: '#C9A84C',
     dim: '#C9A84C18',
-    desc: 'Discover the 5 natural talents that define how you think, act, and contribute — and what kind of work will make you come alive.',
+    desc: 'Explore recurring strengths and patterns that may point toward the kind of work and service that fits you best.',
     questions: 34,
     minutes: 8,
   },
   {
     id: 'ocean' as const,
     name: 'Personality Profile',
-    subtitle: 'How you\'re wired',
+    subtitle: 'Patterns in how you show up',
     icon: '🌊',
     color: '#7C9EF8',
     dim: '#7C9EF818',
-    desc: 'Explore the five dimensions of your personality using the most scientifically validated model in psychology — the IPIP-50.',
+    desc: 'Notice the tendencies that shape how you think, respond, and relate — a helpful lens, not a final label.',
     questions: 50,
     minutes: 10,
   },
   {
     id: 'connect' as const,
     name: 'Connection Style',
-    subtitle: 'How you give & receive love',
+    subtitle: 'Patterns in how you connect',
     icon: '💛',
     color: '#F4845F',
     dim: '#F4845F18',
-    desc: 'Understand the primary ways you express care and the ways you feel most loved — essential for every relationship in your life.',
+    desc: 'Notice the ways you tend to give and receive care, then bring that insight to prayer and discernment.',
     questions: 30,
     minutes: 6,
   },
@@ -167,7 +167,7 @@ export default function HomePage() {
       <section className="px-5 py-8 max-w-lg mx-auto">
         <div className="text-center mb-6">
           <p className="text-[10px] tracking-[0.4em] text-muted uppercase mb-2">The assessments</p>
-          <h2 className="font-display text-3xl text-text">Three lenses. One picture.</h2>
+          <h2 className="font-display text-3xl text-text">Three lenses. One starting point.</h2>
           {completedCount > 0 && (
             <p className="text-sm text-muted mt-2">{completedCount}/3 complete</p>
           )}
