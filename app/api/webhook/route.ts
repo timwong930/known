@@ -2,12 +2,27 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { Resend } from 'resend'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2024-06-20',
-})
-const resend = new Resend(process.env.RESEND_API_KEY || '')
+function getStripeClient() {
+  const secretKey = process.env.STRIPE_SECRET_KEY
+  if (!secretKey) {
+    throw new Error('Missing STRIPE_SECRET_KEY')
+  }
+  return new Stripe(secretKey, {
+    apiVersion: '2024-06-20',
+  })
+}
+
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) {
+    throw new Error('Missing RESEND_API_KEY')
+  }
+  return new Resend(apiKey)
+}
 
 export async function POST(req: NextRequest) {
+  const stripe = getStripeClient()
+  const resend = getResendClient()
   const body = await req.text()
   const sig = req.headers.get('stripe-signature') || ''
 
@@ -25,14 +40,14 @@ export async function POST(req: NextRequest) {
     const { testId, wantsPdf, pdfEmail } = session.metadata || {}
 
     if (wantsPdf === 'true' && pdfEmail) {
-      await sendResultsPdfEmail(pdfEmail, testId)
+      await sendResultsPdfEmail(resend, pdfEmail, testId)
     }
   }
 
   return NextResponse.json({ received: true })
 }
 
-async function sendResultsPdfEmail(email: string, testId: string) {
+async function sendResultsPdfEmail(resend: Resend, email: string, testId: string) {
   const testNames: Record<string, string> = {
     talent: 'Talent Profile',
     ocean: 'Personality Profile',

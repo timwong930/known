@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY || '')
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) {
+    throw new Error('Missing RESEND_API_KEY')
+  }
+  return new Resend(apiKey)
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,6 +16,8 @@ export async function POST(req: NextRequest) {
     if (!email || !email.includes('@')) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
     }
+
+    const resend = getResendClient()
 
     // Send confirmation + schedule reminders via Resend
     await resend.emails.send({
