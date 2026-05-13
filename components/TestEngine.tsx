@@ -240,32 +240,39 @@ function ABQuestion({ question, color, selected, onAnswer }: ABProps) {
     <div>
       <p className="text-[10px] tracking-[0.4em] text-muted uppercase mb-5">Which feels more like you?</p>
       <div className="space-y-3">
-        {(['a', 'b'] as const).map(choice => {
+        {(['a', 'b'] as const).map((choice, index) => {
           const isSelected = selected === choice
           return (
-            <button
-              key={choice}
-              onClick={() => onAnswer(choice)}
-              className="w-full text-left rounded-2xl border p-4 choice-btn transition-all"
-              style={{
-                background: isSelected ? color + '15' : '#161616',
-                borderColor: isSelected ? color + '88' : '#222222',
-              }}
-            >
-              <div className="flex items-start gap-3">
-                <div
-                  className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-bold flex-shrink-0 mt-0.5"
-                  style={{ background: color + '22', color }}
-                >
-                  {choice.toUpperCase()}
+            <div key={choice}>
+              <button
+                onClick={() => onAnswer(choice)}
+                className="w-full text-left rounded-2xl border p-4 choice-btn transition-all"
+                style={{
+                  background: isSelected ? color + '15' : '#161616',
+                  borderColor: isSelected ? color + '88' : '#222222',
+                }}
+              >
+                <div className="flex items-start gap-3">
+                  <div
+                    className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-bold flex-shrink-0 mt-0.5"
+                    style={{ background: color + '22', color }}
+                  >
+                    {choice.toUpperCase()}
+                  </div>
+                  <p className="text-[14px] text-text/90 leading-[1.6]">{question[choice]}</p>
                 </div>
-                <p className="text-[14px] text-text/90 leading-[1.6]">{question[choice]}</p>
-              </div>
-            </button>
+              </button>
+              {index === 0 && (
+                <div className="flex items-center gap-3 py-4" aria-hidden="true">
+                  <div className="h-px flex-1 bg-border" />
+                  <p className="text-center text-[10px] text-muted tracking-[0.3em] uppercase">or</p>
+                  <div className="h-px flex-1 bg-border" />
+                </div>
+              )}
+            </div>
           )
         })}
       </div>
-      <p className="text-center text-[10px] text-muted mt-4 tracking-widest uppercase">or</p>
     </div>
   )
 }
