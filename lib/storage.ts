@@ -78,6 +78,9 @@ export function hasReminderSignup(): boolean {
 }
 
 // Payment status
+// Known v2 testing mode: results are temporarily unlocked for everyone so
+// the assessment scoring and results experience can be validated before the
+// paywall is rebuilt and reintroduced.
 export function markResultsPaid(testIds: string[]): void {
   if (typeof window === 'undefined') return
   try {
@@ -95,6 +98,6 @@ export function getPaidTests(): string[] {
   } catch { return [] }
 }
 
-export function isTestPaid(testId: TestId): boolean {
-  return getPaidTests().includes(testId) || getPaidTests().includes('all')
+export function isTestPaid(_testId: TestId): boolean {
+  return true
 }
