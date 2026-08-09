@@ -10,14 +10,36 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
+    min-width: 320px;
+    overflow-x: hidden;
     background: #080808;
     color: #F0EDE4;
     font-family: var(--font-dm-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  img, svg, video, canvas {
+    max-width: 100%;
+  }
+
+  button, a, input, label {
+    touch-action: manipulation;
+  }
+
+  /* Prevent iOS Safari from zooming focused form fields. */
+  input, textarea, select {
+    font-size: 16px;
+  }
+
+  h1, h2, h3, p, a, button {
+    overflow-wrap: break-word;
   }
 
   ::selection {
@@ -37,6 +59,26 @@
     font-family: var(--font-cormorant);
   }
 
+  /* Utilities for full-height mobile screens and notched iPhones. */
+  .mobile-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-top {
+    padding-top: max(1.25rem, env(safe-area-inset-top));
+  }
+
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .tap-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
   /* Grain overlay for depth */
   .grain::after {
     content: '';
@@ -53,17 +95,21 @@
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Card hover */
+  /* Card hover only on devices that actually hover. */
   .card-hover {
     transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .card-hover:hover {
-    transform: translateY(-2px);
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-hover:hover {
+      transform: translateY(-2px);
+    }
   }
 
   /* Choice button states */
   .choice-btn {
     transition: border-color 0.15s ease, background-color 0.15s ease;
+    min-height: 64px;
   }
   .choice-btn:active {
     transform: scale(0.99);
@@ -73,8 +119,10 @@
   .scale-dot {
     transition: transform 0.1s ease, opacity 0.1s ease;
   }
-  .scale-dot:hover {
-    transform: scale(1.15);
+  @media (hover: hover) and (pointer: fine) {
+    .scale-dot:hover {
+      transform: scale(1.1);
+    }
   }
   .scale-dot:active {
     transform: scale(0.95);
@@ -131,3 +179,12 @@
 
 /* Prevent text select on buttons */
 button { user-select: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
