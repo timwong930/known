@@ -17,6 +17,11 @@ export async function POST(req: NextRequest) {
     const { testId, wantsPdf, pdfEmail, returnUrl } = await req.json()
 
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const testName = testId === 'talent'
+      ? 'Talent Profile'
+      : testId === 'ocean'
+        ? 'Personality Profile'
+        : 'Connection Style'
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -26,10 +31,10 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: `Discovery Suite — Results Unlock`,
-              description: `Detailed results report for your ${testId === 'talent' ? 'Talent Profile' : testId === 'ocean' ? 'Personality Profile' : 'Connection Style'} assessment${wantsPdf ? ' + PDF via email' : ''}`,
+              name: 'Known — Results Unlock',
+              description: `Detailed Known results for your ${testName}${wantsPdf ? ' + PDF via email' : ''}`,
             },
-            unit_amount: 1999, // $19.99
+            unit_amount: 1999,
           },
           quantity: 1,
         },
