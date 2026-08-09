@@ -1,198 +1,82 @@
-# Discovery Suite
+# Known v2
 
-**Know Yourself. Know Your Calling.**
+**Know yourself more clearly. Hold the results with open hands.**
 
-A faith-centered, mobile-first self-discovery platform with three original assessments:
-- ⚡ **Talent Profile** — 34 paired questions across 30 original talent themes
-- 🌊 **Personality Profile** — IPIP-50 (public domain Big Five), 50 questions
-- 💛 **Connection Style** — 30 paired questions across 5 original connection styles
+Known is a Christian self-discovery and discernment tool built around three guided assessments. It helps people notice patterns in their gifts, temperament, and relationships without treating an assessment as a verdict, identity, prophecy, or substitute for spiritual discernment.
 
-**Complete free. Results unlock for a one-time $19.99 fee.**
+## Product direction
 
----
+Known v2 is moving away from feeling like a collection of personality tests and toward a single, coherent discernment experience.
 
-## Tech Stack
+The three lenses are:
+- **Talent Profile** — recurring gifts and strengths
+- **Personality Profile** — IPIP-50 / Big Five temperament patterns
+- **Connection Style** — patterns in how care is given and received
 
-- **Next.js 14** (App Router)
-- **TypeScript**
-- **Tailwind CSS**
-- **Stripe** — payments
-- **Resend** — transactional email / PDF delivery
-- **Vercel** — deployment
+The long-term premium product is the **Known Profile**: a combined interpretation of all three lenses with reflection prompts for calling, work, relationships, growth, and conversations with trusted people.
 
----
+## Product principles
 
-## Local Setup
+1. **Lenses, not labels.** Results should create better questions, not pretend to define a person.
+2. **Discernment over certainty.** Known should never imply that an assessment reveals God's will.
+3. **Useful before paid.** The free experience should give real value and build trust.
+4. **The synthesis is the product.** Individual scores matter less than the patterns across assessments.
+5. **Quietly premium.** Avoid quiz-site gimmicks, overdone gradients, fake urgency, and AI-looking copy.
+6. **Shareable by design.** Results should eventually generate tasteful cards people genuinely want to share.
 
-### 1. Clone & install
+## Current stack
+
+- Next.js 14 App Router
+- TypeScript
+- Tailwind CSS
+- Stripe
+- Resend
+- Vercel
+- Browser localStorage for current assessment state
+
+## Current v2 status
+
+The `rebrand-known-v2` branch contains the first Known v2 pass:
+- Rebranded product and metadata from Discovery Suite to Known
+- New landing experience and positioning
+- Stronger distinction between self-knowledge and spiritual authority
+- Known Profile positioned as the eventual centerpiece
+- Existing assessment flows preserved
+- Existing Stripe implementation preserved for later payment work
+
+See [`KNOWN_V2_GAMEPLAN.md`](./KNOWN_V2_GAMEPLAN.md) for the implementation roadmap and continuation notes.
+
+## Local setup
 
 ```bash
-git clone <your-repo>
-cd discovery-suite
 npm install
-```
-
-### 2. Configure environment
-
-```bash
 cp .env.local.example .env.local
+npm run dev
 ```
 
-Fill in `.env.local`:
+Typical environment variables:
 
-```
+```env
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-
-# Stripe (https://dashboard.stripe.com/apikeys)
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
 STRIPE_SECRET_KEY=sk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
-
-# Resend (https://resend.com/api-keys)
 RESEND_API_KEY=re_...
 RESEND_FROM_EMAIL=results@yourdomain.com
 ```
 
-### 3. Run locally
+## Important launch warning
 
-```bash
-npm run dev
-```
+The current payment unlock flow is **not production-secure yet**. Client-side redirect parameters and localStorage should not be considered proof of purchase. Before paid launch, verify Stripe sessions server-side and persist entitlements outside the browser.
 
-Open [http://localhost:3000](http://localhost:3000)
+## Assessment/IP notes
 
----
+- Talent Profile: original theme names, descriptions, and questions
+- Personality Profile: IPIP-50 items by Lewis Goldberg / public-domain IPIP material
+- Connection Style: original style names, descriptions, and questions
 
-## Stripe Setup
-
-### Create a product
-
-1. Go to [Stripe Dashboard → Products](https://dashboard.stripe.com/products)
-2. Create a product: **"Discovery Suite Results Unlock"**
-3. Price: **$19.99 one-time**
-4. Copy the **Price ID** (starts with `price_`)
-
-### Set up webhooks (for PDF email delivery)
-
-1. Go to [Stripe Dashboard → Webhooks](https://dashboard.stripe.com/webhooks)
-2. Add endpoint: `https://yourdomain.com/api/webhook`
-3. Select event: `checkout.session.completed`
-4. Copy the **Webhook Secret** → add to `.env.local` as `STRIPE_WEBHOOK_SECRET`
-
-For local webhook testing:
-```bash
-stripe listen --forward-to localhost:3000/api/webhook
-```
-
----
-
-## Resend Setup
-
-1. Create account at [resend.com](https://resend.com)
-2. Add & verify your domain
-3. Create an API key
-4. Set `RESEND_FROM_EMAIL` to a verified sender (e.g. `results@yourdomain.com`)
-
----
-
-## Vercel Deployment
-
-### 1. Push to GitHub
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/yourusername/discovery-suite.git
-git push -u origin main
-```
-
-### 2. Import to Vercel
-
-1. Go to [vercel.com](https://vercel.com) → **New Project**
-2. Import your GitHub repo
-3. Framework preset: **Next.js** (auto-detected)
-4. Add all environment variables from `.env.local`
-5. Set `NEXT_PUBLIC_APP_URL` to your Vercel URL (e.g. `https://discovery-suite.vercel.app`)
-6. Deploy
-
-### 3. Update Stripe webhook
-
-After deploying, update your Stripe webhook URL to:
-`https://yourdomain.vercel.app/api/webhook`
-
----
-
-## Project Structure
-
-```
-discovery-suite/
-├── app/
-│   ├── layout.tsx          # Root layout, fonts
-│   ├── page.tsx            # Landing page (home)
-│   ├── globals.css         # Global styles
-│   ├── not-found.tsx       # 404 page
-│   ├── profile/
-│   │   └── page.tsx        # Full synthesis profile
-│   ├── tests/
-│   │   └── [testId]/
-│   │       └── page.tsx    # Test runner
-│   ├── results/
-│   │   └── [testId]/
-│   │       └── page.tsx    # Results + payment gate
-│   └── api/
-│       ├── checkout/       # Stripe checkout session
-│       ├── webhook/        # Stripe webhook (PDF email)
-│       └── reminder-signup/ # Email reminder signup
-├── components/
-│   ├── TestEngine.tsx      # Unified test runner
-│   ├── PaymentPrompt.tsx   # Stripe payment UI
-│   ├── PrayerBlock.tsx     # Pre-test prayer screen
-│   ├── ProgressBar.tsx     # Progress indicator
-│   ├── ReminderSignup.tsx  # Retake reminder signup
-│   └── ScriptureCard.tsx   # Scripture display
-├── lib/
-│   ├── data.ts             # All test data, scoring, types
-│   └── storage.ts          # localStorage helpers
-├── package.json
-├── next.config.js
-├── tailwind.config.js
-├── tsconfig.json
-└── .env.local.example
-```
-
----
-
-## Copyright Notes
-
-- **Talent Profile**: 30 fully original theme names, descriptions, and questions. No Gallup trademarks used.
-- **Personality Profile**: IPIP-50 items by Lewis Goldberg — public domain, free for all use.
-- **Connection Style**: 5 fully original style names, descriptions, and questions. No Gary Chapman IP used.
-
----
-
-## Pricing Model
-
-| Action | Cost |
-|--------|------|
-| Take any test | Free |
-| View results (1 test) | $19.99 one-time |
-| PDF via email | Included |
-| Retake tests | Free |
-| Subscription | None — ever |
-
----
-
-## Retake Recommendation
-
-We recommend taking each assessment **2–3 times per year**. The reminder signup collects emails and sends follow-ups at:
-- 2 weeks
-- 1 month
-- 3 months
-- 6 months
-
----
+Avoid marketing language that implies clinical diagnosis, guaranteed career fit, divine revelation, or scientifically validated conclusions beyond what the underlying instruments support.
 
 ## License
 
-All original content © Discovery Suite. IPIP-50 items are public domain.
+Original Known assessment content © respective project owner. IPIP material remains subject to its public-domain terms.
