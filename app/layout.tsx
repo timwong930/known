@@ -18,13 +18,22 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Discovery Suite — Know Yourself. Know Your Calling.',
+  title: 'Known — Christian Self-Discovery & Discernment',
   description:
-    'Three guided assessments to help you notice patterns in your gifts, temperament, and ways of connecting — so you can bring them before God for discernment.',
-  keywords: ['personality test', 'strengths assessment', 'faith', 'calling', 'Christian', 'purpose', 'spiritual growth'],
+    'Know yourself more clearly without turning a personality test into a verdict. Explore your gifts, temperament, and connection patterns, then bring what you notice before God for discernment.',
+  keywords: [
+    'Christian self discovery',
+    'Christian personality assessment',
+    'calling',
+    'discernment',
+    'strengths assessment',
+    'purpose',
+    'faith',
+  ],
   openGraph: {
-    title: 'Discovery Suite — Know Yourself. Know Your Calling.',
-    description: 'Notice patterns in gifts, temperament, and connection style — then bring what you see before God for discernment.',
+    title: 'Known — Understand how you are wired. Discern what comes next.',
+    description:
+      'Three guided assessments for gifts, personality, and connection — designed as lenses for prayerful discernment, not labels.',
     type: 'website',
   },
   twitter: { card: 'summary_large_image' },
@@ -34,7 +43,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  themeColor: '#080808',
+  themeColor: '#0A0A09',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
