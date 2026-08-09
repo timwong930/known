@@ -1,45 +1,38 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import ScriptureCard from '@/components/ScriptureCard'
 import { loadResults } from '@/lib/storage'
 import type { AllResults } from '@/lib/data'
-import { TEST_META } from '@/lib/data'
 
-const OPENING_PRAYER = `Father, if I'm still learning who I am, meet me here with grace.\nHelp me listen honestly, without needing a label to carry me.\nLet what is useful become a starting point, not a verdict.\nLet what is true be confirmed in Your light, and let what is unhelpful be laid down.\nAs I sort through these patterns, keep my heart soft, my ego quiet, and my eyes on You.\nIn Jesus' name — Amen.`
-
-const TEST_CARDS = [
+const ASSESSMENTS = [
   {
     id: 'talent' as const,
+    eyebrow: 'Gifts',
     name: 'Talent Profile',
-    subtitle: 'Patterns in your gifts',
-    icon: '⚡',
-    color: '#C9A84C',
-    dim: '#C9A84C18',
-    desc: 'Explore recurring strengths and patterns that may point toward the kind of work and service that fits you best.',
+    icon: '✦',
+    color: '#D6B766',
+    description: 'Notice the strengths and recurring patterns that tend to energize your work, service, and contribution.',
     questions: 34,
     minutes: 8,
   },
   {
     id: 'ocean' as const,
+    eyebrow: 'Temperament',
     name: 'Personality Profile',
-    subtitle: 'Patterns in how you show up',
-    icon: '🌊',
-    color: '#7C9EF8',
-    dim: '#7C9EF818',
-    desc: 'Notice the tendencies that shape how you think, respond, and relate — a helpful lens, not a final label.',
+    icon: '◌',
+    color: '#8DA7E8',
+    description: 'Explore the tendencies that shape how you think, respond, decide, and move through the world.',
     questions: 50,
     minutes: 10,
   },
   {
     id: 'connect' as const,
+    eyebrow: 'Relationships',
     name: 'Connection Style',
-    subtitle: 'Patterns in how you connect',
-    icon: '💛',
-    color: '#F4845F',
-    dim: '#F4845F18',
-    desc: 'Notice the ways you tend to give and receive care, then bring that insight to prayer and discernment.',
+    icon: '♡',
+    color: '#D98D72',
+    description: 'Understand how you naturally give, receive, and recognize care in the relationships that matter most.',
     questions: 30,
     minutes: 6,
   },
@@ -47,184 +40,95 @@ const TEST_CARDS = [
 
 export default function HomePage() {
   const [results, setResults] = useState<AllResults>({})
-  const [showPrayer, setShowPrayer] = useState(false)
-  const [prayerDone, setPrayerDone] = useState(false)
 
   useEffect(() => {
     setResults(loadResults())
-    const done = localStorage.getItem('discovery_opening_prayer')
-    if (done) setPrayerDone(true)
   }, [])
 
-  function handlePrayerAmen() {
-    localStorage.setItem('discovery_opening_prayer', 'true')
-    setPrayerDone(true)
-    setShowPrayer(false)
-  }
-
-  const completedCount = Object.keys(results).filter(k =>
-    ['talent','ocean','connect'].includes(k) && results[k as keyof AllResults]
-  ).length
+  const completedCount = ASSESSMENTS.filter(item => !!results[item.id]).length
 
   return (
-    <main className="min-h-screen bg-background grain">
-      {/* ── Opening Prayer Modal ── */}
-      {showPrayer && (
-        <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur flex items-center justify-center px-5">
-          <div className="w-full max-w-md animate-scale-in">
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-gold/30 text-gold text-lg mb-4">✝</div>
-              <p className="text-xs tracking-[0.4em] text-muted uppercase mb-1">Before you begin</p>
-              <h2 className="font-display text-2xl text-text">A prayer for clarity</h2>
-            </div>
-            <div className="bg-card border border-border rounded-2xl p-6 mb-5">
-              <p className="prayer-text text-text/85 text-[15px] whitespace-pre-line">{OPENING_PRAYER}</p>
-            </div>
-            <button
-              onClick={handlePrayerAmen}
-              className="w-full py-4 rounded-xl bg-gold text-background font-sans font-bold text-sm tracking-wide hover:bg-gold-light transition-colors"
-            >
-              Amen — take me to the tests
-            </button>
-            <button
-              onClick={() => setShowPrayer(false)}
-              className="w-full text-center text-xs text-muted mt-3 py-2"
-            >
-              Skip prayer
-            </button>
+    <main className="min-h-screen bg-background grain overflow-hidden">
+      <nav className="max-w-6xl mx-auto px-5 sm:px-8 py-5 flex items-center justify-between relative z-10">
+        <Link href="/" className="font-display text-2xl tracking-tight text-text">Known.</Link>
+        <a href="#assessments" className="text-xs text-subtle hover:text-text transition-colors">
+          {completedCount ? `${completedCount}/3 completed` : 'Explore assessments'}
+        </a>
+      </nav>
+
+      <section className="relative max-w-6xl mx-auto px-5 sm:px-8 pt-16 sm:pt-24 pb-20">
+        <div className="absolute -top-20 right-[-170px] w-[420px] h-[420px] rounded-full bg-gold/5 blur-3xl pointer-events-none" />
+        <div className="max-w-3xl relative">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border-light bg-card/70 px-3 py-1.5 mb-7">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold" />
+            <span className="text-[10px] tracking-[0.2em] uppercase text-subtle">Christian self-discovery for discernment</span>
+          </div>
+
+          <h1 className="font-display text-[52px] sm:text-[76px] leading-[0.97] tracking-[-0.035em] text-text max-w-3xl">
+            You are more than a label.
+            <span className="block italic text-gold mt-2">Become better known.</span>
+          </h1>
+
+          <p className="mt-7 text-base sm:text-lg leading-relaxed text-subtle max-w-xl">
+            Known helps you notice patterns in your gifts, temperament, and relationships — then gives you language to bring those patterns into prayer, wise counsel, and real-life discernment.
+          </p>
+
+          <div className="mt-9 flex flex-col sm:flex-row gap-3 sm:items-center">
+            <a href="#assessments" className="inline-flex justify-center items-center rounded-xl bg-gold px-6 py-3.5 text-sm font-semibold text-background hover:bg-gold-light transition-colors">
+              Start discovering yourself
+            </a>
+            <p className="text-xs text-muted sm:pl-2">No account needed to begin · About 24 minutes for all three</p>
           </div>
         </div>
-      )}
-
-      {/* ── Hero ── */}
-      <section className="px-5 pt-16 pb-8 text-center max-w-lg mx-auto">
-        <h1 className="font-display text-[42px] leading-[1.1] text-text mb-4">
-          Know Yourself.<br />
-          <span className="text-gold italic">Know Your Calling.</span>
-        </h1>
-
-        <p className="text-subtle text-base leading-relaxed mb-8 max-w-sm mx-auto">
-          Three guided assessments to help you notice patterns in your gifts, temperament, and ways of connecting — so you can bring them before God for discernment.
-        </p>
-
-        {!prayerDone && (
-          <button
-            onClick={() => setShowPrayer(true)}
-            className="inline-flex items-center gap-2 border border-gold/40 text-gold rounded-xl px-6 py-3 text-sm font-sans hover:bg-gold/5 transition-colors mb-4"
-          >
-            ✝ Open with prayer
-          </button>
-        )}
-
-        <ScriptureCard
-          verse="For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future."
-          reference="Jeremiah 29:11"
-        />
       </section>
 
-      {/* ── Free Notice (1st of 2) ── */}
-      <section className="px-5 pb-4 max-w-lg mx-auto">
-        <div className="flex items-center gap-3 bg-green/5 border border-green/20 rounded-xl px-4 py-3.5">
-          <span className="text-green text-lg">✓</span>
-          <p className="text-sm text-subtle">
-            Start free. Full results unlock with a one-time $19.99 payment per test.
-          </p>
-        </div>
-      </section>
-
-      {/* ── The Why ── */}
-      <section className="px-5 py-10 max-w-lg mx-auto">
-        <div className="text-center mb-6">
-          <p className="text-[10px] tracking-[0.4em] text-muted uppercase mb-2">Why this exists</p>
-          <h2 className="font-display text-3xl text-text">You weren't made by accident.</h2>
-        </div>
-
-        <div className="space-y-5">
+      <section className="border-y border-border bg-card/35">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-10 grid md:grid-cols-3 gap-8">
           {[
-            { icon: '📖', title: 'Self-knowledge is stewardship', body: 'Learning about yourself can be helpful, but it is not the same as hearing from God. Use what helps, and hold the rest with open hands.' },
-            { icon: '🎯', title: 'Calling requires clarity', body: 'You can\'t find the right work, the right team, or the right community if a test becomes your final authority. Let it raise questions, then take those questions to God.' },
-            { icon: '🌱', title: 'You were made on purpose', body: 'Psalm 139 says you are fearfully and wonderfully made. This can point you toward prayerful discernment, but the Lord still has the final word.' },
-          ].map(item => (
-            <div key={item.title} className="flex gap-4 items-start">
-              <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center text-lg flex-shrink-0">{item.icon}</div>
+            ['01', 'Notice', 'See recurring patterns without forcing yourself into a box.'],
+            ['02', 'Reflect', 'Ask better questions about where those patterns show up in your life.'],
+            ['03', 'Discern', 'Bring what resonates before God, trusted people, and lived experience.'],
+          ].map(([number, title, body]) => (
+            <div key={number} className="flex gap-4">
+              <span className="font-display text-gold text-xl">{number}</span>
               <div>
-                <h3 className="font-sans font-semibold text-text text-sm mb-1">{item.title}</h3>
-                <p className="text-sm text-subtle leading-relaxed">{item.body}</p>
+                <h2 className="font-medium text-text text-sm mb-1.5">{title}</h2>
+                <p className="text-sm text-subtle leading-relaxed">{body}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── Scripture 2 ── */}
-      <ScriptureCard
-        verse="I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well."
-        reference="Psalm 139:14"
-        className="max-w-lg mx-auto"
-      />
-
-      {/* ── Test Cards ── */}
-      <section className="px-5 py-8 max-w-lg mx-auto">
-        <div className="text-center mb-6">
-          <p className="text-[10px] tracking-[0.4em] text-muted uppercase mb-2">The assessments</p>
-          <h2 className="font-display text-3xl text-text">Three lenses. One starting point.</h2>
-          {completedCount > 0 && (
-            <p className="text-sm text-muted mt-2">{completedCount}/3 complete</p>
-          )}
+      <section id="assessments" className="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+        <div className="max-w-2xl mb-10">
+          <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-3">Three lenses</p>
+          <h2 className="font-display text-4xl sm:text-5xl text-text leading-tight">A clearer picture of how you show up.</h2>
+          <p className="text-sm sm:text-base text-subtle mt-4 leading-relaxed max-w-xl">
+            Each assessment looks at a different dimension of your life. None of them tells you who you are. Together, they can help you notice what deserves more attention.
+          </p>
         </div>
 
-        <div className="space-y-4">
-          {TEST_CARDS.map(card => {
-            const isDone = !!results[card.id]
+        <div className="grid md:grid-cols-3 gap-4">
+          {ASSESSMENTS.map((assessment) => {
+            const done = !!results[assessment.id]
             return (
               <Link
-                key={card.id}
-                href={isDone ? `/results/${card.id}` : `/tests/${card.id}`}
-                className="block card-hover"
+                key={assessment.id}
+                href={done ? `/results/${assessment.id}` : `/tests/${assessment.id}`}
+                className="group rounded-2xl border border-border bg-card p-5 sm:p-6 hover:border-border-light transition-all card-hover"
               >
-                <div
-                  className="rounded-2xl border p-5 transition-colors"
-                  style={{
-                    background: isDone ? card.dim : 'var(--tw-bg-opacity,#161616)',
-                    backgroundColor: isDone ? card.dim : '#161616',
-                    borderColor: isDone ? card.color + '55' : '#222222',
-                  }}
-                >
-                  <div className="flex items-start gap-4">
-                    {/* Icon */}
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-                      style={{ background: card.color + '18' }}
-                    >
-                      {isDone ? '✓' : card.icon}
-                    </div>
-
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <h3 className="font-sans font-semibold text-text text-sm">{card.name}</h3>
-                        {isDone
-                          ? <span className="text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 rounded-full" style={{ color: card.color, background: card.color + '18' }}>Done</span>
-                          : <span className="text-[10px] text-muted">{card.minutes} min</span>
-                        }
-                      </div>
-                      <p className="text-xs font-semibold mb-1.5" style={{ color: card.color }}>{card.subtitle}</p>
-                      <p className="text-xs text-subtle leading-relaxed">{card.desc}</p>
-                      <div className="flex items-center gap-3 mt-3">
-                        <span className="text-[10px] text-muted">{card.questions} questions</span>
-                        <span className="text-[10px] text-muted">·</span>
-                        <span className="text-[10px] text-green font-semibold">Start free</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 pt-3.5 border-t border-border/60 flex items-center justify-between">
-                    <span className="text-xs text-muted">
-                      {isDone ? 'View your results' : 'Begin when ready'}
-                    </span>
-                    <span className="text-xs" style={{ color: card.color }}>
-                      {isDone ? 'Results →' : 'Start →'}
-                    </span>
-                  </div>
+                <div className="flex items-center justify-between mb-10">
+                  <span className="text-[10px] tracking-[0.25em] uppercase" style={{ color: assessment.color }}>{assessment.eyebrow}</span>
+                  <span className="text-sm" style={{ color: assessment.color }}>{done ? '✓' : assessment.icon}</span>
+                </div>
+                <h3 className="font-display text-2xl text-text mb-3">{assessment.name}</h3>
+                <p className="text-sm leading-relaxed text-subtle min-h-[84px]">{assessment.description}</p>
+                <div className="mt-7 pt-4 border-t border-border flex items-center justify-between">
+                  <span className="text-[11px] text-muted">{assessment.questions} questions · {assessment.minutes} min</span>
+                  <span className="text-xs group-hover:translate-x-1 transition-transform" style={{ color: assessment.color }}>
+                    {done ? 'View →' : 'Begin →'}
+                  </span>
                 </div>
               </Link>
             )
@@ -232,58 +136,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Free Notice (2nd of 2) ── */}
-      <section className="px-5 pb-8 max-w-lg mx-auto">
-        <div className="bg-card border border-border rounded-2xl p-5">
-          <p className="text-[10px] tracking-[0.3em] text-muted uppercase mb-3">How it works</p>
-          <div className="space-y-3">
-            {[
-              { step: '1', text: 'Take the assessment as a starting point, not a verdict.' },
-              { step: '2', text: 'Move slowly enough to notice what feels true, and what feels worth bringing to God.' },
-              { step: '3', text: 'When you reach the end, treat the results as a prompt for prayerful discernment.' },
-              { step: '4', text: 'If you want a PDF, you can still receive one by email to revisit later.' },
-            ].map(item => (
-              <div key={item.step} className="flex gap-3 items-start">
-                <div className="w-5 h-5 rounded-full bg-gold/15 text-gold text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                  {item.step}
-                </div>
-                <p className="text-xs text-subtle leading-relaxed">{item.text}</p>
+      <section className="max-w-6xl mx-auto px-5 sm:px-8 pb-20 sm:pb-24">
+        <div className="rounded-3xl border border-gold/20 bg-gradient-to-br from-[#17130A] via-[#10100E] to-[#0B0B0A] p-7 sm:p-10 grid md:grid-cols-[1.2fr_.8fr] gap-10 items-center">
+          <div>
+            <p className="text-[10px] tracking-[0.35em] uppercase text-gold mb-3">The Known Profile</p>
+            <h2 className="font-display text-3xl sm:text-4xl text-text leading-tight">The interesting part is where the patterns overlap.</h2>
+            <p className="text-sm text-subtle leading-relaxed mt-4 max-w-xl">
+              Complete all three assessments to bring your gifts, personality, and connection style into one view. Known v2 is being built around this combined profile — a practical reflection tool for calling, work, relationships, and growth.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-border bg-background/50 p-5">
+            {['Strength patterns', 'Temperament signals', 'Relationship tendencies', 'Calling reflection prompts'].map((item, index) => (
+              <div key={item} className="flex items-center gap-3 py-3 border-b border-border last:border-0">
+                <span className="text-[10px] text-gold">0{index + 1}</span>
+                <span className="text-sm text-subtle">{item}</span>
               </div>
             ))}
-          </div>
-          <div className="mt-4 pt-4 border-t border-border">
-            <p className="text-xs text-muted text-center">
-              <span className="text-green font-semibold">Start free.</span> Results are a one-time $19.99 per test. No subscriptions. No accounts needed.
-            </p>
+            {completedCount >= 2 && (
+              <Link href="/profile" className="mt-4 inline-flex text-xs text-gold hover:text-gold-light transition-colors">
+                Open your combined profile →
+              </Link>
+            )}
           </div>
         </div>
       </section>
 
-      {/* ── Full Profile teaser ── */}
-      {completedCount >= 2 && (
-        <section className="px-5 pb-8 max-w-lg mx-auto">
-          <Link href="/profile" className="block card-hover">
-            <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-[#1A1408] to-[#0E0E0E] p-5 text-center">
-              <p className="text-[10px] tracking-[0.4em] text-gold uppercase mb-2">{completedCount}/3 Complete</p>
-              <h3 className="font-display text-xl text-text mb-2">View Your Full Profile →</h3>
-              <p className="text-xs text-subtle">Your talents, personality, and connection style — synthesized into one calling picture.</p>
-            </div>
-          </Link>
-        </section>
-      )}
+      <section className="max-w-3xl mx-auto px-5 sm:px-8 pb-24 text-center">
+        <div className="w-8 h-px bg-gold/50 mx-auto mb-6" />
+        <blockquote className="font-display italic text-2xl sm:text-3xl leading-relaxed text-text/90">
+          “Search me, God, and know my heart; test me and know my anxious thoughts.”
+        </blockquote>
+        <p className="text-[10px] tracking-[0.3em] uppercase text-muted mt-5">Psalm 139:23</p>
+        <p className="text-xs text-muted leading-relaxed mt-8 max-w-xl mx-auto">
+          Known is not spiritual direction, prophecy, or a substitute for prayer, Scripture, community, pastoral care, or professional guidance. Assessments are lenses — not verdicts.
+        </p>
+      </section>
 
-      {/* ── Scripture 3 ── */}
-      <ScriptureCard
-        verse="For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do."
-        reference="Ephesians 2:10"
-        className="max-w-lg mx-auto"
-      />
-
-      {/* ── Footer ── */}
-      <footer className="text-center px-5 py-10 text-[11px] text-muted space-y-1">
-        <p>Discovery Suite © {new Date().getFullYear()}</p>
-        <p>Taking all tests is always free. Results are a one-time charge.</p>
-        <p className="text-[10px] opacity-50">Assessment content is original. IPIP-50 items are public domain (Lewis Goldberg).</p>
+      <footer className="border-t border-border">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-8 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+          <p className="font-display text-xl text-text">Known.</p>
+          <p className="text-[11px] text-muted">Know yourself more clearly. Hold the results with open hands.</p>
+        </div>
       </footer>
     </main>
   )
