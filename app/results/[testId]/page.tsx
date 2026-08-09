@@ -22,7 +22,10 @@ function asScoreRecord(value: unknown): Record<string, number> | null {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null
 
   const entries = Object.entries(value as Record<string, unknown>)
-    .filter(([, score]) => typeof score === 'number' && Number.isFinite(score))
+    .filter((entry): entry is [string, number] => {
+      const score = entry[1]
+      return typeof score === 'number' && Number.isFinite(score)
+    })
 
   if (!entries.length) return null
   return Object.fromEntries(entries)
